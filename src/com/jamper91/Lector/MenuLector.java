@@ -6,6 +6,7 @@ import java.util.Vector;
 import com.jamper91.Administrador.MenuAdmin;
 import com.jamper91.Lector.DialogoCicloRuta.DialogoCicloRutaListener;
 import com.jamper91.base.Administrador;
+import com.jamper91.servicios.Inicio;
 import com.jamper91.servicios.R;
 
 import android.annotation.SuppressLint;
@@ -70,11 +71,11 @@ public class MenuLector extends Activity implements DialogoCicloRutaListener {
 					startActivity(i);
 				}
 			}else{
-				dialogo("Los datos que intenta cargar para lecturas no están asignados al usuario, verifique el plan de lecturas con el administrador","Error");
+				dialogo("Los datos que intenta cargar para lecturas no estï¿½n asignados al usuario, verifique el plan de lecturas con el administrador","Error");
 			}
 		}catch(Exception e)
 		{
-			dialogo("Los datos que intenta cargar para lecturas no están asignados al usuario, verifique el plan de lecturas con el administrador","Error L-ML-oDAC");
+			dialogo("Los datos que intenta cargar para lecturas no estï¿½n asignados al usuario, verifique el plan de lecturas con el administrador","Error L-ML-oDAC");
 		}
 		
 		
@@ -100,6 +101,16 @@ public class MenuLector extends Activity implements DialogoCicloRutaListener {
 			return true;
 		else
 			return false;
+	}
+	/**
+	 * Lo llevo a la pagina de inicio de la aplicacion
+	 */
+	@Override
+	public void onBackPressed() {
+		// Write your code here
+		Intent i= new Intent(this, Inicio.class);
+		startActivity(i);
+		//super.onBackPressed();
 	}
 
 }
