@@ -77,6 +77,8 @@ public class MenuAdmin extends Activity implements DialogoArchivosListener,
 						Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.imgOpcion3:
+			Intent intent=new Intent(this,Preferencias.class);
+			startActivity(intent);
 			break;
 		case R.id.imgOpcion4:
 			break;

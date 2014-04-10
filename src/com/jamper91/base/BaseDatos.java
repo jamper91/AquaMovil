@@ -41,7 +41,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 		arg0.execSQL(sql);
 		sql = "CREATE TABLE Usuarios ( id integer,  Nombre text,   Apellido text,   Login text NOT NULL,   Clave text,   Rol text ) ";
 		arg0.execSQL(sql);
-
+		sql = "CREATE TABLE parametros ( id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  Nombre text,   valor text) ";
+		arg0.execSQL(sql);
 		// Si estoy aqui, es porque hasta ahora se va a crear la base de datos,
 		// por eso voy agregar un usuario administrador
 		sql = "INSERT INTO Usuarios VALUES(0, 'Super Usuario', null,'super','super','Super');";
@@ -65,6 +66,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 		arg0.execSQL(sql);
 		sql = "drop table Usuarios;";
 		arg0.execSQL(sql);
+		sql = "drop table parametros;";
+		arg0.execSQL(sql);
 		// Genero las nuevas tablas;
 
 		sql = "CREATE TABLE Causales (   CodigoCausal integer NOT NULL,   Descripcion text );";
@@ -79,7 +82,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 		arg0.execSQL(sql);
 		sql = "CREATE TABLE Usuarios ( id integer,  Nombre text,   Apellido text,   Login text NOT NULL,   Clave text,   Rol text ) ";
 		arg0.execSQL(sql);
-
+		sql = "CREATE TABLE parametros ( id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,  Nombre text,   valor text) ";
+		arg0.execSQL(sql);
 		// Si estoy aqui, es porque hasta ahora se va a crear la base de datos,
 		// por eso voy agregar un usuario administrador
 		sql = "INSERT INTO Usuarios VALUES(0, 'Super Usuario', null,'super','super','Super');";
@@ -110,6 +114,16 @@ public class BaseDatos extends SQLiteOpenHelper {
 		SQLiteDatabase db = getWritableDatabase();
 		db.execSQL("insert into Observaciones VALUES(" + codigo + ",'"
 				+ descripcion + "')");
+	}
+	/**
+	 * Almacena un parametro en la base de datos
+	 * @param nombre
+	 * @param valor
+	 */
+	public void addParametro(String nombre, String valor) {
+		SQLiteDatabase db = getWritableDatabase();
+		db.execSQL("insert into parametros (Nombre,valor) VALUES('" + nombre + "','"
+				+ valor + "')");
 	}
 
 	/**
@@ -656,6 +670,37 @@ public class BaseDatos extends SQLiteOpenHelper {
 					"select count(matricula) from lecturas where ciclo="
 							+ ciclo + " and ruta=" + ruta
 							+ " and id<"+id+" order by id limit 1", null);
+			if (c != null) {
+				while (c.moveToNext()) {
+					retornar = c.getString(0);
+				}
+
+			}
+			db.close();
+			if (retornar != "")
+				return retornar;
+			else
+				return null;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.e("getPosicionUltimaLecturaEditada", e.getMessage());
+			return null;
+		}
+	}
+	
+	public String getParametroByNombre(String nombre)
+	{
+		String retornar = "";
+		try {
+
+			SQLiteDatabase db = getReadableDatabase();
+			// Cursor c =
+			// db.rawQuery("(select matricula from lecturas where nuevoCiclo is null order by id limit 2) UNION select matricula from lecturas where id<(select id from lecturas where nuevoCiclo is null order by id  limit 1)",
+			// null);
+			String sql="select valor from parametros where Nombre='"+ nombre+"'";
+			Log.i("getParametroByNombre", sql);
+			Cursor c = db.rawQuery(sql, null);
 			if (c != null) {
 				while (c.moveToNext()) {
 					retornar = c.getString(0);

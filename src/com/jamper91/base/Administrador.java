@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.Vector;
 
 import android.content.Context;
-
 import android.os.Environment;
 import android.util.Log;
 
@@ -47,7 +46,7 @@ public class Administrador {
 	 * Constructor de la clase
 	 */
 	private Administrador(Context c) {
-		bd = new BaseDatos(c, "servicios2", null, 11);
+		bd = new BaseDatos(c, "servicios2", null, 13);
 		//Creo las tablas
 		tablas.add("Lecturas");
 		tablas.add("Observaciones");
@@ -436,6 +435,13 @@ public class Administrador {
 	public String[] getInformacionRuta(String ciclo, String ruta) 
 	{
 		return bd.getInformacionRuta(ciclo, ruta);
+	}
+	public String getParametroByNombre(String nombre)
+	{
+		return bd.getParametroByNombre(nombre);
+	}
+	public void addParametro(String nombre, String valor) {
+		bd.addParametro(nombre, valor);
 	}
 	
 

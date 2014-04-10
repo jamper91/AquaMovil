@@ -1,6 +1,5 @@
 package com.jamper91.Lector;
 
-import com.jamper91.Administrador.DialogoArchivos.DialogoArchivosListener;
 import com.jamper91.servicios.R;
 
 import android.annotation.SuppressLint;
@@ -10,9 +9,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView.FindListener;
 import android.widget.EditText;
 
 @SuppressLint("NewApi")

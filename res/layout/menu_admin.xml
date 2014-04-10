@@ -85,7 +85,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Agregar Usuarios"
+                android:text="Parametros"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FFFFFF" />
 
