@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AQuaMovil</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    
+	
+	<string name="RolAdministrador" >ADMIN</string>
+	<string name="RolLector">USER</string>
+	<string-array name="Roles">
+	    <item>Super</item>
+	    <item>ADMIN</item>
+	    <item>USER</item>
+	</string-array>
+	<string-array name="Tablas">
+		<item >Causales</item>
+		<item >Lecturas</item>
+		<item >Observaciones</item>
+		<item >Plan Lecturas</item>
+		<item >Tipos Medidor</item>
+		<item >Usuarios</item>
+	</string-array>
+
+	<string-array name="Archivos">
+	    <item >Causales.aqu</item>
+		<item >Lecturas.aqu</item>
+		<item >Observaciones.aqu</item>
+		<item >PlanLecturas.aqu</item>
+		<item >TiposMedidor.aqu</item>
+		<item >Usuarios.aqu</item>
+	</string-array>
+	<string name="colorAzul">blanco</string>
+</resources>
