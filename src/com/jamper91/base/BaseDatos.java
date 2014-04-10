@@ -389,17 +389,45 @@ public class BaseDatos extends SQLiteOpenHelper {
 		Vector<String> usuarios = new Vector<String>();
 		SQLiteDatabase db = getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM Lecturas;", null);
-		while (c.moveToNext()) {
-			usuarios.add(c.getString(0) + "," + c.getInt(1) + "," + c.getInt(2)
-					+ "," + c.getInt(3) + "," + c.getString(4) + ","
-					+ c.getString(5) + "," + c.getInt(6) + "," + c.getInt(7)
-					+ "," + c.getInt(8) + "," + c.getInt(9) + ","
-					+ c.getInt(10) + "," + c.getInt(11) + "," + c.getInt(12)
-					+ "," + c.getInt(13) + "," + c.getInt(14) + ","
-					+ c.getInt(15) + "," + c.getInt(16) + "," + c.getInt(17)
-					+ "," + c.getInt(18) + "," + c.getInt(19) + ","
-					+ c.getInt(20) + "," + c.getInt(21) + "," + c.getInt(22)
-					+ "," + c.getInt(23) + "," + c.getInt(24) + ";");
+		while (c.moveToNext()) 
+		{
+			String r="";
+			r+=c.getString(0)+",";
+			r+=c.getString(1)+",";
+			r+=c.getString(2)+",";
+			r+=c.getString(3)+",";
+			r+=c.getString(4)+",";
+			r+=c.getString(5)+",";
+			r+=c.getString(6)+",";
+			r+=c.getString(7)+",";
+			r+=c.getString(8)+",";
+			r+=c.getString(9)+",";
+			r+=c.getString(10)+",";
+			r+=c.getString(11)+",";
+			r+=c.getString(12)+",";
+			r+=c.getString(13)+",";
+			r+=c.getString(14)+",";
+			r+=c.getString(15)+",";
+			r+=c.getString(16)+",";
+			r+=c.getString(17)+",";
+			r+=c.getString(18)+",";
+			r+=c.getString(19)+",";
+			r+=c.getString(20)+",";
+			r+=c.getString(21)+",";
+			r+=c.getString(22)+",";
+			r+=c.getString(23)+",";
+			r+=c.getString(24);
+			usuarios.add(r);
+//			usuarios.add(c.getString(0) + "," + c.getInt(1) + "," + c.getInt(2)
+//					+ "," + c.getInt(3) + "," + c.getString(4) + ","
+//					+ c.getString(5) + "," + c.getInt(6) + "," + c.getInt(7)
+//					+ "," + c.getInt(8) + "," + c.getInt(9) + ","
+//					+ c.getInt(10) + "," + c.getInt(11) + "," + c.getInt(12)
+//					+ "," + c.getInt(13) + "," + c.getInt(14) + ","
+//					+ c.getInt(15) + "," + c.getInt(16) + "," + c.getInt(17)
+//					+ "," + c.getInt(18) + "," + c.getInt(19) + ","
+//					+ c.getInt(20) + "," + c.getInt(21) + "," + c.getInt(22)
+//					+ "," + c.getInt(23) + "," + c.getInt(24) + ";");
 		}
 		db.close();
 		return usuarios;
@@ -834,6 +862,39 @@ public class BaseDatos extends SQLiteOpenHelper {
 			e.printStackTrace();
 			Log.e("getUsuario", e.getMessage());
 			return null;
+		}
+	}
+	public int getCausalByDescripcion(String descripcion) {
+		int retornar = -1;
+		try {
+
+			SQLiteDatabase db = getReadableDatabase();
+			// Cursor c =
+			// db.rawQuery("(select matricula from lecturas where nuevoCiclo is null order by id limit 2) UNION select matricula from lecturas where id<(select id from lecturas where nuevoCiclo is null order by id  limit 1)",
+			// null);
+			String sql="select CodigoCausal from causales where descripcion='"+descripcion+"'";
+			Cursor c = db.rawQuery(sql, null);
+			
+			if (c != null) {
+				while (c.moveToNext()) {
+					retornar = Integer.parseInt(c.getString(0));
+				}
+
+			}
+			db.close();
+			if (retornar != -1){
+				
+				return retornar;
+			}else{
+					return -1;
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.e("getUsuario", e.getMessage());
+			return -1;
 		}
 	}
 	public Vector<String[]> getPlanLecturasByLogin(String login) {

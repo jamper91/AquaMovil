@@ -165,7 +165,7 @@ public class Administrador {
 			fichero = new FileWriter(nombre);
 			pw = new PrintWriter(fichero);
 			for (String dato : datos) {
-				pw.println(dato+"\n");
+				pw.println(dato);
 			}
 
 		} catch (Exception e) {
@@ -442,6 +442,9 @@ public class Administrador {
 	}
 	public void addParametro(String nombre, String valor) {
 		bd.addParametro(nombre, valor);
+	}
+	public int getCausalByDescripcion(String descripcion) {
+		return bd.getCausalByDescripcion(descripcion);
 	}
 	
 

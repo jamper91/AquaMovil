@@ -457,7 +457,7 @@ public class Lectura extends Activity implements DialogoCausalListener,DialogoOb
 	public void onDialogAceptarClick(DialogFragment dialog, String causal1,
 			String rutaFoto1) {
 		// TODO Auto-generated method stub
-		this.causal=causal1;
+		this.causal=admin.getCausalByDescripcion(causal1)+"";
 		this.rutaFoto=rutaFoto1;
 		if(causal!= null && rutaFoto!=null)
 			lblCausal.setText("Causal(1)");
