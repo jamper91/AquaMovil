@@ -31,7 +31,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 		Log.e("onCreate", "Creandose por primera vez");
 		String sql = "CREATE TABLE Causales (   CodigoCausal integer NOT NULL,   Descripcion text );";
 		arg0.execSQL(sql);
-		sql = "CREATE TABLE Lecturas (Matricula text NOT NULL,   Ciclo text,   Ruta text,   Consecutivo integer,   Direccion text,   NumMedidor text, TipoMedidor integer,   LecturaAnterior integer,   ConsumoMedio integer,   NuevoCiclo integer,   NuevaRuta integer,   NuevoConsecutivo integer,   NuevaLectura integer,   Observacion1 integer,   Observacion2 integer,   Observacion3 integer,   Causal integer,   Foto text,   FechaHora text,   Latitud text,   Longitud text,   Altitud text,   Intentos integer,   Login text,   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  ) ";
+		sql = "CREATE TABLE Lecturas (Matricula text NOT NULL,   Ciclo text,   Ruta text,   Consecutivo integer,   Direccion text,   NumMedidor text, TipoMedidor integer,   LecturaAnterior integer,   ConsumoMedio integer,   NuevoCiclo integer,   NuevaRuta integer,   NuevoConsecutivo integer,   NuevaLectura integer ,   Observacion1 integer,   Observacion2 integer,   Observacion3 integer,   Causal integer,   Foto text,   FechaHora text,   Latitud text,   Longitud text,   Altitud text,   Intentos integer,   Login text,   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL  ) ";
 		arg0.execSQL(sql);
 		sql = "CREATE TABLE Observaciones (   CodigoObservacion integer NOT NULL,   Descripcion text ) ";
 		arg0.execSQL(sql);
@@ -753,17 +753,36 @@ public class BaseDatos extends SQLiteOpenHelper {
 					"select matricula from lecturas where ciclo=" + ciclo
 							+ " and ruta=" + ruta + " and id>" + id
 							+ " order by id limit 1", null);
+			
 			if (c != null) {
 				while (c.moveToNext()) {
 					retornar = c.getString(0);
 				}
 
 			}
-			db.close();
-			if (retornar != "")
+			
+			if (retornar != ""){
+				db.close();
 				return retornar;
-			else
-				return null;
+			}else{
+				Log.i("Otro lado", "Es otro lado");
+				String sql="select matricula from lecturas where ciclo="+ciclo+" and ruta="+ruta+" and NuevaLectura IS NULL and id!="+id+" order by id limit 1";
+				c= db.rawQuery(sql, null);
+				if (c != null) {
+					while (c.moveToNext()) {
+						retornar = c.getString(0);
+					}
+
+				}
+				db.close();
+				if (retornar != ""){
+					
+					return retornar;
+				}else
+					return null;
+			}
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

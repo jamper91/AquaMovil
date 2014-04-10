@@ -47,7 +47,7 @@ public class Administrador {
 	 * Constructor de la clase
 	 */
 	private Administrador(Context c) {
-		bd = new BaseDatos(c, "servicios2", null, 9);
+		bd = new BaseDatos(c, "servicios2", null, 11);
 		//Creo las tablas
 		tablas.add("Lecturas");
 		tablas.add("Observaciones");
