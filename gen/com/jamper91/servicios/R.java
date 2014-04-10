@@ -80,10 +80,10 @@ public final class R {
         public static final int Lectura_txtLectura=0x7f09001b;
         public static final int Lectura_txtMatricula=0x7f090013;
         public static final int Lecturas_txtCantidad=0x7f090012;
-        public static final int Reporte_tblReporte=0x7f090029;
+        public static final int Reporte_gridDatos=0x7f090029;
         public static final int TextView01=0x7f09000b;
         public static final int TextView03=0x7f090015;
-        public static final int action_settings=0x7f09002c;
+        public static final int action_settings=0x7f09002a;
         public static final int btnIngresar=0x7f090003;
         public static final int imgEncuestas=0x7f09000d;
         public static final int imgLecturas=0x7f090027;
@@ -91,12 +91,10 @@ public final class R {
         public static final int imgOpcion2=0x7f090024;
         public static final int imgOpcion3=0x7f090025;
         public static final int imgOpcion4=0x7f090026;
-        public static final int tableRow1=0x7f09002a;
         public static final int textView1=0x7f090000;
         public static final int textView2=0x7f09000e;
         public static final int textView3=0x7f090018;
         public static final int textView4=0x7f09001a;
-        public static final int textView5=0x7f09002b;
         public static final int txtCiclo=0x7f090007;
         public static final int txtClave=0x7f090002;
         public static final int txtRuta=0x7f090008;
