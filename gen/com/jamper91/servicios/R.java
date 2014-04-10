@@ -62,8 +62,8 @@ public final class R {
         public static final int DialogoObservacion_txtCodObs2=0x7f09000e;
         public static final int DialogoObservacion_txtCodObs3=0x7f090011;
         public static final int DialogoValidar_txtNumeroContador=0x7f090013;
+        public static final int Dialogo_Causal_atxtCodigo=0x7f090006;
         public static final int Dialogo_Causal_btnCamara=0x7f090007;
-        public static final int Dialogo_Causal_txtCausal=0x7f090006;
         public static final int Dialogo_causal_imgFoto=0x7f090008;
         public static final int ImageView02=0x7f09002b;
         public static final int Lectura_NumContador=0x7f090019;
@@ -111,9 +111,10 @@ public final class R {
         public static final int dialogo_observacion=0x7f030004;
         public static final int dialogo_validar=0x7f030005;
         public static final int lectura=0x7f030006;
-        public static final int menu_admin=0x7f030007;
-        public static final int menu_lector=0x7f030008;
-        public static final int reporte=0x7f030009;
+        public static final int list_item=0x7f030007;
+        public static final int menu_admin=0x7f030008;
+        public static final int menu_lector=0x7f030009;
+        public static final int reporte=0x7f03000a;
     }
     public static final class menu {
         public static final int inicio=0x7f080000;

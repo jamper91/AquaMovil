@@ -323,7 +323,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 		SQLiteDatabase db = getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM Causales;", null);
 		while (c.moveToNext()) {
-			causales.add(c.getString(0) + "," + c.getString(1) + ";");
+//			causales.add(c.getString(0) + "," + c.getString(1) + ";");
+			causales.add(c.getString(1));
 		}
 		db.close();
 		return causales;

@@ -1,10 +1,7 @@
 package com.jamper91.Lector;
 
 import java.io.File;
-
-import com.jamper91.Lector.DialogoCicloRuta.DialogoCicloRutaListener;
-import com.jamper91.base.Administrador;
-import com.jamper91.servicios.R;
+import java.util.Vector;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,31 +13,40 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Audio.Media;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.jamper91.base.Administrador;
+import com.jamper91.servicios.R;
 
 @SuppressLint("NewApi")
 public class DialogoCausal extends DialogFragment {
 
 	// Elementos graficos a usar
-	EditText txtCausal;
+//	EditText txtCausal;
+	AutoCompleteTextView txtCodigo;
 	ImageView btnCamara,imgFoto;
 	View view;
 	
 	//Variable que almacena la direccion de la foto a tomar
 	private String path=null,causal=null;
 	//Variables que recibe este dialogo, para funcionar bn
-	String enrutamiento="",rutaFoto=null;
-	private final int REQUEST_CAMERA = 1;
+	String enrutamiento="",rutaFoto="";
+	private final int REQUEST_CAMERA = 4;
 	Administrador admin = Administrador.getInstance(null);
+	
+	//Para la prediccion de texto
+	ArrayAdapter<String> adapter;
 	
 	static DialogoCausal newInstance(String enrutamiento,String causal, String rutaFoto)
 	{
@@ -72,7 +78,8 @@ public class DialogoCausal extends DialogFragment {
 		}
 	}
 	public void iniciarlizar() {
-		txtCausal = (EditText) view.findViewById(R.id.Dialogo_Causal_txtCausal);
+//		txtCausal = (EditText) view.findViewById(R.id.Dialogo_Causal_txtCausal);
+		txtCodigo=(AutoCompleteTextView) view.findViewById(R.id.Dialogo_Causal_atxtCodigo);
 		btnCamara = (ImageView) view.findViewById(R.id.Dialogo_Causal_btnCamara);
 		btnCamara.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -89,11 +96,34 @@ public class DialogoCausal extends DialogFragment {
     			}
             }
         });
+		
+		Vector<String> causales=admin.getAllElementos("Causales");
+		adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, causales);
+		txtCodigo.setAdapter(adapter);
+		txtCodigo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		    @Override
+		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		    	causal = adapter.getItem(position).toString();
+		    }
+		});
+		txtCodigo.addTextChangedListener(new TextWatcher() {
+		    @Override
+		    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+		    @Override
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {
+		    	causal = null;
+		    }
+		    @Override
+		    public void afterTextChanged(Editable s) {}
+		});
+		
 		imgFoto=(ImageView)view.findViewById(R.id.Dialogo_causal_imgFoto);
 		//Luego de inicializar, muestro los valore spor default
-		if(causal!=null)
-			txtCausal.setText(causal);
-		if(rutaFoto!=null)
+		if(causal!=null){
+//			txtCausal.setText(causal);
+			txtCodigo.setText(causal);
+		}
+		if(rutaFoto!=null && rutaFoto.length()>0)
 		{
 			File imgFile = new  File(rutaFoto);
 			if(imgFile.exists()){
@@ -165,7 +195,7 @@ public class DialogoCausal extends DialogFragment {
         //Log.i("rutaFoto", rutaFoto);
         //Log.i("causal", causal);
         
-        path=admin.getRutaSalida()+"Salida/Causal/Causal-"+enrutamiento+".jpg";
+        path=admin.getRutaSalida()+"/Causal/Causal-"+enrutamiento+".jpg";
         
         
 	}
@@ -184,9 +214,12 @@ public class DialogoCausal extends DialogFragment {
 	                    public void onClick(View v)
 	                    {
 	                        Boolean wantToCloseDialog = true;
-	                        causal = txtCausal.getText().toString();
-	                        if(causal.length()==0)
-	                        	causal=null;
+//	                        causal = txtCausal.getText().toString();
+//	                        causal = txtCodigo.getText().toString();
+	                        if(rutaFoto==null)
+	                        	rutaFoto="";
+	                        if(causal==null)
+	                        	causal="";
 	                        if(causal==null && rutaFoto==null)
 	                        	wantToCloseDialog=true;
 	                        else if(causal.length()>0 && rutaFoto.length()>0)

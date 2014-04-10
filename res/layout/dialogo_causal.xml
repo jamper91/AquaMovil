@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:gravity="center" >
 
-        <EditText
+       <!--  <EditText
             android:id="@+id/Dialogo_Causal_txtCausal"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -20,8 +20,20 @@
             android:ems="10"
             android:inputType="number" >
 
+            
+        </EditText> -->
+
+        <AutoCompleteTextView
+            android:id="@+id/Dialogo_Causal_atxtCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Codigo"
+            android:inputType="text" >
+
             <requestFocus />
-        </EditText>
+        </AutoCompleteTextView>
 
         <ImageView
             android:id="@+id/Dialogo_Causal_btnCamara"
